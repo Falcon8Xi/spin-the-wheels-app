@@ -41,6 +41,8 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        env:
+          NODE_ENV: development
 
       - name: Disable blocked Gradle resolver
         run: |
@@ -59,10 +61,14 @@ jobs:
       - name: Build APK
         if: ${{ github.event_name == 'push' || inputs.build_type == 'apk' || inputs.build_type == 'both' }}
         run: ./android/gradlew -p android assembleRelease
+        env:
+          NODE_ENV: production
 
       - name: Build AAB
         if: ${{ github.event_name == 'push' || inputs.build_type == 'aab' || inputs.build_type == 'both' }}
         run: ./android/gradlew -p android bundleRelease
+        env:
+          NODE_ENV: production
 
       - name: Upload APK
         if: ${{ github.event_name == 'push' || inputs.build_type == 'apk' || inputs.build_type == 'both' }}
