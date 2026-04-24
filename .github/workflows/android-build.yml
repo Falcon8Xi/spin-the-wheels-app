@@ -55,6 +55,27 @@ jobs:
       - name: Generate Android project
         run: npx expo prebuild --platform android --no-install --clean
 
+      - name: Enable release size optimizations
+        run: |
+          set -euo pipefail
+          cat >> android/gradle.properties <<'EOF'
+          android.enableProguardInReleaseBuilds=true
+          android.enableShrinkResourcesInReleaseBuilds=true
+          reactNativeArchitectures=armeabi-v7a,arm64-v8a
+          EOF
+          python - <<'PY'
+          from pathlib import Path
+          path = Path("android/app/build.gradle")
+          text = path.read_text()
+          if "universalApk false" not in text and "splits {" in text:
+              text = text.replace(
+                  "reset()",
+                  "reset()\\n            universalApk false",
+                  1,
+              )
+          path.write_text(text)
+          PY
+
       - name: Make Gradle executable
         run: chmod +x android/gradlew
 
@@ -75,7 +96,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: spin-the-wheels-apk
-          path: android/app/build/outputs/apk/release/*.apk
+          path: |
+            android/app/build/outputs/apk/release/*.apk
+            android/app/build/outputs/apk/*/release/*.apk
           if-no-files-found: error
 
       - name: Upload AAB
