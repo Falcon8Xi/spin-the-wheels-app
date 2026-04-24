@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Web To App Builder</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="workspace">
+        <div class="panel form-panel">
+          <div class="topbar">
+            <div>
+              <p class="eyebrow">React Native WebView Generator</p>
+              <h1>Convert a website into an app project</h1>
+            </div>
+            <span class="status-pill">Local Tool</span>
+          </div>
+
+          <form id="builderForm" class="builder-form">
+            <label>
+              Website URL
+              <input id="websiteUrl" name="websiteUrl" type="url" placeholder="https://example.com" required />
+            </label>
+
+            <div class="grid two">
+              <label>
+                App name
+                <input id="appName" name="appName" type="text" value="My Web App" required />
+              </label>
+              <label>
+                Package ID
+                <input id="packageId" name="packageId" type="text" value="com.webtoapp.myapp" />
+              </label>
+            </div>
+
+            <div class="grid three">
+              <label>
+                Primary
+                <input id="primaryColor" name="primaryColor" type="color" value="#14532d" />
+              </label>
+              <label>
+                Accent
+                <input id="accentColor" name="accentColor" type="color" value="#0f766e" />
+              </label>
+              <label>
+                Background
+                <input id="backgroundColor" name="backgroundColor" type="color" value="#f8fafc" />
+              </label>
+            </div>
+
+            <fieldset>
+              <legend>Native permissions</legend>
+              <div class="permission-grid">
+                <label class="check-row"><input type="checkbox" name="camera" /> Camera</label>
+                <label class="check-row"><input type="checkbox" name="microphone" /> Microphone</label>
+                <label class="check-row"><input type="checkbox" name="location" /> Location</label>
+                <label class="check-row"><input type="checkbox" name="storage" /> Storage</label>
+              </div>
+            </fieldset>
+
+            <button class="primary-action" type="submit">
+              <span>Generate app project</span>
+            </button>
+          </form>
+        </div>
+
+        <aside class="panel output-panel">
+          <div class="phone-preview" aria-label="App preview">
+            <div class="phone-bar"></div>
+            <div class="phone-screen" id="phoneScreen">
+              <div class="preview-header" id="previewHeader">My Web App</div>
+              <div class="preview-url" id="previewUrl">https://example.com</div>
+              <div class="preview-lines">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+          </div>
+
+          <div id="result" class="result-box">
+            Generated projects will appear inside the local <code>generated</code> folder.
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

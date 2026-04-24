@@ -1,0 +1,44 @@
+{
+  "expo": {
+    "name": "Niotron Wrapper",
+    "slug": "niotron-wrapper",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "scheme": "niotron-wrapper",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#f8fafc"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.webtoapp.niotronwrapper",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Niotron Wrapper needs camera access when the website requests it.",
+        "NSMicrophoneUsageDescription": "Niotron Wrapper needs microphone access when the website requests it.",
+        "NSLocationWhenInUseUsageDescription": "Niotron Wrapper needs location access when the website requests it."
+      }
+    },
+    "android": {
+      "package": "com.webtoapp.niotronwrapper",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#14532d"
+      },
+      "permissions": [
+        "CAMERA",
+        "RECORD_AUDIO",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION"
+      ]
+    },
+    "extra": {
+      "websiteUrl": "https://niotron.com/"
+    }
+  }
+}

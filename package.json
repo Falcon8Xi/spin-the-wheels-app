@@ -1,0 +1,19 @@
+{
+  "name": "web-to-app-builder",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A local tool that converts any website URL into a ready-to-run Expo React Native WebView app project.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "webview",
+    "react-native",
+    "expo",
+    "app-builder"
+  ],
+  "author": "",
+  "license": "MIT"
+}

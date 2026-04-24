@@ -1,0 +1,41 @@
+{
+  "expo": {
+    "name": "Example App",
+    "slug": "example-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.svg",
+    "userInterfaceStyle": "automatic",
+    "scheme": "example-app",
+    "splash": {
+      "image": "./assets/splash.svg",
+      "resizeMode": "contain",
+      "backgroundColor": "#f8fafc"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.webtoapp.example",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Example App needs camera access when the website requests it.",
+        "NSMicrophoneUsageDescription": "Example App needs microphone access when the website requests it.",
+        "NSLocationWhenInUseUsageDescription": "Example App needs location access when the website requests it."
+      }
+    },
+    "android": {
+      "package": "com.webtoapp.example",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.svg",
+        "backgroundColor": "#14532d"
+      },
+      "permissions": [
+        "CAMERA"
+      ]
+    },
+    "extra": {
+      "websiteUrl": "https://example.com/"
+    }
+  }
+}
