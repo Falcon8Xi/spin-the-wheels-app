@@ -1,6 +1,16 @@
 # Web To App Builder
 
+[![Build Android App](https://github.com/Falcon8Xi/spin-the-wheels-app/actions/workflows/android-build.yml/badge.svg)](https://github.com/Falcon8Xi/spin-the-wheels-app/actions/workflows/android-build.yml)
+
 A local website-to-app generator. Paste any website URL, choose app metadata and permissions, then generate a complete Expo React Native project that opens the site inside a native WebView.
+
+## Download Spin The Wheels APK Or AAB
+
+Open the Android build workflow:
+
+https://github.com/Falcon8Xi/spin-the-wheels-app/actions/workflows/android-build.yml
+
+Click `Run workflow`, choose `apk`, `aab`, or `both`, then open the completed run and download the file from `Artifacts`.
 
 ## Start The Builder
 

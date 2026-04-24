@@ -1,0 +1,71 @@
+name: Build Android App
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      build_type:
+        description: "Android artifact to build"
+        required: true
+        default: "both"
+        type: choice
+        options:
+          - apk
+          - aab
+          - both
+
+jobs:
+  android:
+    name: Build APK/AAB
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: generated/spin-the-wheels-2026-04-24T19-14-21-505Z-d6e31a
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate Android project
+        run: npx expo prebuild --platform android --no-install --clean
+
+      - name: Build APK
+        if: ${{ github.event_name == 'push' || inputs.build_type == 'apk' || inputs.build_type == 'both' }}
+        run: ./android/gradlew -p android assembleRelease
+
+      - name: Build AAB
+        if: ${{ github.event_name == 'push' || inputs.build_type == 'aab' || inputs.build_type == 'both' }}
+        run: ./android/gradlew -p android bundleRelease
+
+      - name: Upload APK
+        if: ${{ github.event_name == 'push' || inputs.build_type == 'apk' || inputs.build_type == 'both' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: spin-the-wheels-apk
+          path: generated/spin-the-wheels-2026-04-24T19-14-21-505Z-d6e31a/android/app/build/outputs/apk/release/*.apk
+          if-no-files-found: error
+
+      - name: Upload AAB
+        if: ${{ github.event_name == 'push' || inputs.build_type == 'aab' || inputs.build_type == 'both' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: spin-the-wheels-aab
+          path: generated/spin-the-wheels-2026-04-24T19-14-21-505Z-d6e31a/android/app/build/outputs/bundle/release/*.aab
+          if-no-files-found: error
