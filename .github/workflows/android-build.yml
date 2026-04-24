@@ -46,6 +46,9 @@ jobs:
       - name: Generate Android project
         run: npx expo prebuild --platform android --no-install --clean
 
+      - name: Make Gradle executable
+        run: chmod +x android/gradlew
+
       - name: Build APK
         if: ${{ github.event_name == 'push' || inputs.build_type == 'apk' || inputs.build_type == 'both' }}
         run: ./android/gradlew -p android assembleRelease
