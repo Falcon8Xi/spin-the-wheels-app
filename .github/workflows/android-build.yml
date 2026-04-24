@@ -39,6 +39,8 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        env:
+          NODE_ENV: development
 
       - name: Disable blocked Gradle resolver
         run: |
@@ -56,17 +58,21 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build APK
-        if: ${{ inputs.build_type == 'apk' || inputs.build_type == 'both' }}
+        if: ${{ github.event_name == 'push' || inputs.build_type == 'apk' || inputs.build_type == 'both' }}
         working-directory: android
         run: ./gradlew assembleRelease
+        env:
+          NODE_ENV: production
 
       - name: Build AAB
-        if: ${{ inputs.build_type == 'aab' || inputs.build_type == 'both' }}
+        if: ${{ github.event_name == 'push' || inputs.build_type == 'aab' || inputs.build_type == 'both' }}
         working-directory: android
         run: ./gradlew bundleRelease
+        env:
+          NODE_ENV: production
 
       - name: Upload APK
-        if: ${{ inputs.build_type == 'apk' || inputs.build_type == 'both' }}
+        if: ${{ github.event_name == 'push' || inputs.build_type == 'apk' || inputs.build_type == 'both' }}
         uses: actions/upload-artifact@v4
         with:
           name: spin-the-wheels-apk
@@ -74,7 +80,7 @@ jobs:
           if-no-files-found: error
 
       - name: Upload AAB
-        if: ${{ inputs.build_type == 'aab' || inputs.build_type == 'both' }}
+        if: ${{ github.event_name == 'push' || inputs.build_type == 'aab' || inputs.build_type == 'both' }}
         uses: actions/upload-artifact@v4
         with:
           name: spin-the-wheels-aab
