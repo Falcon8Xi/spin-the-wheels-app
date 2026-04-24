@@ -14,6 +14,14 @@ https://github.com/Falcon8Xi/spin-the-wheels-app/actions/workflows/android-build
 
 Click `Run workflow`, choose `apk`, `aab`, or `both`, then click the finished workflow run and download the file from the `Artifacts` section.
 
+For Play Store, use the AAB. It lets Google Play deliver a smaller device-specific install. APK artifacts are mainly for direct testing and side-loading.
+
+## Size Optimizations
+
+- Release builds enable ProGuard and Android resource shrinking.
+- APK builds are configured for common phone ABIs only: `arm64-v8a` and `armeabi-v7a`.
+- AAB is recommended for Play Console because Google Play slices native libraries and resources per device.
+
 ## Run Locally
 
 ```powershell
