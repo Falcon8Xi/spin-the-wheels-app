@@ -1,8 +1,18 @@
 # Spin The Wheels
 
+[![Build Android App](https://github.com/Falcon8Xi/spin-the-wheels-app/actions/workflows/android-build.yml/badge.svg?branch=clean-app)](https://github.com/Falcon8Xi/spin-the-wheels-app/actions/workflows/android-build.yml)
+
 This is a generated Expo React Native app that wraps:
 
 https://spinthewheels.io/
+
+## Download APK Or AAB
+
+Open the Android build workflow:
+
+https://github.com/Falcon8Xi/spin-the-wheels-app/actions/workflows/android-build.yml
+
+Click `Run workflow`, choose `apk`, `aab`, or `both`, then click the finished workflow run and download the file from the `Artifacts` section.
 
 ## Run Locally
 
@@ -12,6 +22,8 @@ npx expo start
 ```
 
 ## Build Android APK/AAB
+
+GitHub Actions is the easiest option. You can also build with Expo EAS:
 
 ```powershell
 npm install

@@ -1,0 +1,67 @@
+name: Build Android App
+
+on:
+  workflow_dispatch:
+    inputs:
+      build_type:
+        description: "Android artifact to build"
+        required: true
+        default: "both"
+        type: choice
+        options:
+          - apk
+          - aab
+          - both
+
+jobs:
+  android:
+    name: Build APK/AAB
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate Android project
+        run: npx expo prebuild --platform android --no-install --clean
+
+      - name: Build APK
+        if: ${{ inputs.build_type == 'apk' || inputs.build_type == 'both' }}
+        working-directory: android
+        run: ./gradlew assembleRelease
+
+      - name: Build AAB
+        if: ${{ inputs.build_type == 'aab' || inputs.build_type == 'both' }}
+        working-directory: android
+        run: ./gradlew bundleRelease
+
+      - name: Upload APK
+        if: ${{ inputs.build_type == 'apk' || inputs.build_type == 'both' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: spin-the-wheels-apk
+          path: android/app/build/outputs/apk/release/*.apk
+          if-no-files-found: error
+
+      - name: Upload AAB
+        if: ${{ inputs.build_type == 'aab' || inputs.build_type == 'both' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: spin-the-wheels-aab
+          path: android/app/build/outputs/bundle/release/*.aab
+          if-no-files-found: error
