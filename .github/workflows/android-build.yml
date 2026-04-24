@@ -43,6 +43,10 @@ jobs:
       - name: Generate Android project
         run: npx expo prebuild --platform android --no-install --clean
 
+      - name: Make Gradle executable
+        working-directory: android
+        run: chmod +x gradlew
+
       - name: Build APK
         if: ${{ inputs.build_type == 'apk' || inputs.build_type == 'both' }}
         working-directory: android
