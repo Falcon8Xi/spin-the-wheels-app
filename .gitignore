@@ -1,0 +1,14 @@
+node_modules/
+.expo/
+dist/
+build/
+android/
+ios/
+*.jks
+*.keystore
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.log
+.DS_Store

@@ -1,0 +1,39 @@
+{
+  "expo": {
+    "name": "Spin The Wheels",
+    "slug": "spin-the-wheels",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "scheme": "spin-the-wheels",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#f8fafc"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.webtoapp.spinthewheels",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Spin The Wheels needs camera access when the website requests it.",
+        "NSMicrophoneUsageDescription": "Spin The Wheels needs microphone access when the website requests it.",
+        "NSLocationWhenInUseUsageDescription": "Spin The Wheels needs location access when the website requests it."
+      }
+    },
+    "android": {
+      "package": "com.webtoapp.spinthewheels",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#2563eb"
+      },
+      "permissions": []
+    },
+    "extra": {
+      "websiteUrl": "https://spinthewheels.io/"
+    }
+  }
+}
