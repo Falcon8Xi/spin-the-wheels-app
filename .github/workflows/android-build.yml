@@ -21,13 +21,12 @@ jobs:
     name: Build APK/AAB
     runs-on: ubuntu-latest
     timeout-minutes: 45
-    defaults:
-      run:
-        working-directory: generated/spin-the-wheels-2026-04-24T19-14-21-505Z-d6e31a
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: clean-app
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -62,7 +61,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: spin-the-wheels-apk
-          path: generated/spin-the-wheels-2026-04-24T19-14-21-505Z-d6e31a/android/app/build/outputs/apk/release/*.apk
+          path: android/app/build/outputs/apk/release/*.apk
           if-no-files-found: error
 
       - name: Upload AAB
@@ -70,5 +69,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: spin-the-wheels-aab
-          path: generated/spin-the-wheels-2026-04-24T19-14-21-505Z-d6e31a/android/app/build/outputs/bundle/release/*.aab
+          path: android/app/build/outputs/bundle/release/*.aab
           if-no-files-found: error
