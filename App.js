@@ -1,7 +1,6 @@
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import {
   ActivityIndicator,
-  Alert,
   BackHandler,
   Linking,
   Modal,
@@ -63,12 +62,6 @@ export default function App() {
     setHasError(false);
     setLoading(true);
     webViewRef.current?.injectJavaScript(`window.location.href = ${JSON.stringify(HOME_URL)}; true;`);
-  }, []);
-
-  const openInBrowser = useCallback(() => {
-    Linking.openURL(HOME_URL).catch(() => {
-      Alert.alert("Could not open browser", "Please try again from your device browser.");
-    });
   }, []);
 
   const shareApp = useCallback(() => {
@@ -181,11 +174,8 @@ export default function App() {
               This app provides a mobile wrapper for {HOSTNAME} with native navigation controls, offline retry,
               sharing, and browser handoff for external links.
             </Text>
-            <TouchableOpacity style={styles.modalAction} onPress={openInBrowser}>
-              <Text style={styles.modalActionText}>Open Website</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.modalActionSecondary} onPress={shareApp}>
-              <Text style={styles.modalActionSecondaryText}>Share</Text>
+            <TouchableOpacity style={styles.modalAction} onPress={shareApp}>
+              <Text style={styles.modalActionText}>Share</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.modalClose} onPress={() => setAboutVisible(false)}>
               <Text style={styles.modalCloseText}>Close</Text>
